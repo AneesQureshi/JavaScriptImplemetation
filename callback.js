@@ -24,3 +24,25 @@ numbers.forEach(function (num) {
 
 numbers.forEach(num => console.log("Number:", num));
 numbers.forEach(num=>console.log("My Number : ",num ));
+
+
+
+// Callback Hell
+getUser(id, function(user) {
+  getOrders(user, function(orders) {
+    getOrderDetails(orders[0], function(details) {
+      processOrder(details, function(result) {
+        console.log("Done:", result);
+      });
+    });
+  });
+});
+
+
+// Cleaner with Promises
+getUser(id)
+  .then(getOrders)
+  .then(orders => getOrderDetails(orders[0]))
+  .then(processOrder)
+  .then(result => console.log("Done:", result))
+  .catch(err => console.error(err));
